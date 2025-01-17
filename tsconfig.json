@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "es2020",
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "sourceMap": true,
+    "outDir": "target/dist",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
