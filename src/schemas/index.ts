@@ -1,5 +1,3 @@
-import { typeDefs as bookTypes } from './book.js';
-import { typeDefs as animalTypes } from './animal.js';
 import { typeDefs as ledTypes } from './led.js';
 
 const baseTypeDefs = `
@@ -9,7 +7,5 @@ const baseTypeDefs = `
 
 export const typeDefs = [
   baseTypeDefs,
-  bookTypes,
-  animalTypes,
   ledTypes,
 ];
