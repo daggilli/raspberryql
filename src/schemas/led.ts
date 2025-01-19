@@ -1,11 +1,7 @@
 'use strict';
 export const typeDefs = `#graphql
-  type LedState {
-    state: Boolean
-  }
-
   extend type Query {
-    state: LedState
+    state: Boolean
   }
 
   extend type Mutation {

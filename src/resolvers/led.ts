@@ -1,25 +1,28 @@
 'use strict';
-import { Gpio } from "onoff";
-
-import { initialiseGPIO, setLedState, getLedState, toggleState } from '../gpio.js';
+import { gpioController } from '../gpio.js';
 import { LedState } from '../interfaces.js';
 
-const led: Gpio = initialiseGPIO();
+const LED_PIN = 'GPIO21';
 
 export const resolvers = {
   Query: {
-    state: (): LedState => ({ state: getLedState(led) }),
+    state: (): boolean | null => {
+      const state = gpioController.getPinState(LED_PIN);
+
+      return state !== undefined ? state : null;
+    },
   },
   Mutation: {
     setState: (_: unknown, args: LedState): boolean => {
       console.log(args);
       const { state } = args;
       console.log(`setState ${state}`);
-      setLedState(led, state);
+      gpioController.setPinState(LED_PIN, state);
       return Boolean(state);
     },
-    toggleState: (): boolean => {
-      return toggleState(led);
+    toggleState: (): boolean | null => {
+      const newState = gpioController.togglePinState(LED_PIN);
+      return newState !== undefined ? newState : null;
     }
   }
 };
