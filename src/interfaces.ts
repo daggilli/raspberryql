@@ -10,3 +10,7 @@ export interface Animal {
   name: string;
   age: number;
 }
+
+export interface LedState {
+  state: boolean;
+}
