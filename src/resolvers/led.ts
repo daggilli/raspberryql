@@ -1,8 +1,7 @@
 'use strict';
 import { gpioController } from '../gpio.js';
 import { LedState } from '../interfaces.js';
-
-const LED_PIN = 'GPIO21';
+import { LED_PIN } from '../pinConfig.js';
 
 export const resolvers = {
   Query: {
@@ -14,9 +13,7 @@ export const resolvers = {
   },
   Mutation: {
     setState: (_: unknown, args: LedState): boolean => {
-      console.log(args);
       const { state } = args;
-      console.log(`setState ${state}`);
       gpioController.setPinState(LED_PIN, state);
       return Boolean(state);
     },

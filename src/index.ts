@@ -9,20 +9,23 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import https from 'https';
 import fs from 'fs';
+import { ServerConfig } from './interfaces.js';
+import { loadConfigFile } from './utilities.js';
+import { PINS } from './pinConfig.js';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const expressPort = 4000;
+const serverConfig: ServerConfig = loadConfigFile();
 
-gpioController.registerPin('GPIO21', 'out');
+gpioController.registerPins(PINS);
 
 (async () => {
   const app: Express = express();
 
   const httpsServer = https.createServer(
     {
-      key: fs.readFileSync(`./ssl/selfsigned.key`),
-      cert: fs.readFileSync(`./ssl/selfsigned.crt`),
+      key: fs.readFileSync(serverConfig.sslKeyPath),
+      cert: fs.readFileSync(serverConfig.sslCertificatePath),
       requestCert: false,
       rejectUnauthorized: false,
     },
@@ -57,8 +60,8 @@ gpioController.registerPin('GPIO21', 'out');
   );
 
   await new Promise<void>((resolve) => httpsServer.listen({
-    port: expressPort
+    port: serverConfig.expressPort
   }, resolve));
 
-  console.log(`🚀 Server ready at https://localhost:${expressPort}/`);
+  console.log(`🚀 Server ready at https://localhost:${serverConfig.expressPort}/`);
 })();

@@ -17,7 +17,6 @@
     "graphql": "^16.10.0",
     "graphql-tools": "^9.0.11",
     "onoff": "^6.0.3",
-    "pinmapper": "file:../pinmapper-1.0.0.tgz",
     "source-map-support": "^0.5.21"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 'use strict';
-import { Gpio, BinaryValue, Direction } from "onoff";
-import { PinMapper } from 'pinmapper';
+import { Gpio, BinaryValue } from "onoff";
+import { PinMapper } from './pinMapper.js';
+import { PinConfig } from "./interfaces.js";
 
 const boolToBin = (val: boolean): BinaryValue => val ? 1 : 0;
 const binToBool = (val: BinaryValue): boolean => val === 1;
@@ -16,11 +17,17 @@ class GPIOController {
     this._pins = new Map();
   }
 
-  registerPin(pinName: string, direction: Direction) {
-    const pinNumber = this._mapper.pinNumber(pinName);
+  registerPins(config: PinConfig[]) {
+    for (const pin of config) {
+      this.registerPin(pin);
+    }
+  }
+
+  registerPin(config: PinConfig) {
+    const pinNumber = this._mapper.pinNumber(config.pinName);
     if (pinNumber) {
-      const pin = new Gpio(pinNumber, direction);
-      this._pins.set(pinName, pin);
+      const pin = new Gpio(pinNumber, config.direction);
+      this._pins.set(config.pinName, pin);
     }
   }
 
@@ -45,7 +52,6 @@ class GPIOController {
   }
 
   setPinState(pinName: string, state: boolean) {
-    console.log(`SET PIN ${pinName} ${state}`);
     const pin = this.getPin(pinName);
     if (pin) {
       pin.writeSync(boolToBin(state));

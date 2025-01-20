@@ -1,4 +1,7 @@
 'use strict';
+
+import { Direction } from "onoff";
+
 export interface Book {
   title: string;
   author: string;
@@ -13,4 +16,15 @@ export interface Animal {
 
 export interface LedState {
   state: boolean;
+}
+
+export interface ServerConfig {
+  expressPort: number;
+  sslKeyPath: string;
+  sslCertificatePath: string;
+}
+
+export interface PinConfig {
+  pinName: string;
+  direction: Direction
 }

@@ -1,0 +1,5 @@
+{
+  "expressPort": 4000,
+  "sslKeyPath": "./ssl/selfsigned.key",
+  "sslCertificatePath": "./ssl/selfsigned.crt"
+}
