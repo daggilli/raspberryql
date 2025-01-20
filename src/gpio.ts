@@ -71,7 +71,7 @@ class GPIOController {
 
   shutdown() {
     for (const pin of [...this._pins.values()]) {
-      if (pin.direction()) {
+      if (pin.direction() === 'out') {
         pin.writeSync(0);
       }
       pin.unexport();
