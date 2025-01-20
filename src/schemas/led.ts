@@ -1,11 +1,11 @@
 'use strict';
 export const typeDefs = `#graphql
   extend type Query {
-    state: Boolean
+    state(pinName: String!): Boolean
   }
 
   extend type Mutation {
-    setState(state: Boolean!): Boolean
-    toggleState: Boolean
+    setState(pinName: String!, state: Boolean!): Boolean
+    toggleState(pinName: String!): Boolean
   }
 `;

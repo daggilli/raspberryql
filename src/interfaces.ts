@@ -2,19 +2,8 @@
 
 import { Direction } from "onoff";
 
-export interface Book {
-  title: string;
-  author: string;
-  queryTime?: string;
-}
-
-export interface Animal {
-  species: string;
-  name: string;
-  age: number;
-}
-
-export interface LedState {
+export interface PinState {
+  pinName: string;
   state: boolean;
 }
 

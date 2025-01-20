@@ -1,0 +1,23 @@
+mutation toggle {
+  toggleState(pinName: "GPIO21")
+}
+
+mutation setState($state: Boolean!) {
+  setState(pinName: "GPIO21", state: $state)
+}
+
+mutation turnOn {
+  setState(pinName: "GPIO21",state: true)
+}
+
+mutation turnOff {
+  setState(pinName: "GPIO21",state: false)
+}
+
+query getState {
+  state(pinName: "GPIO21")
+}
+
+query getSwitch {
+  state(pinName: "GPIO17")
+}
