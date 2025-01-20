@@ -11,7 +11,7 @@ class GPIOController {
   private _pins: Map<string, Gpio>;
 
   constructor() {
-    console.log("GIPPER CTOR");
+    console.log("Creating GPIOController");
     this._mapper = new PinMapper();
     this._pins = new Map();
   }
