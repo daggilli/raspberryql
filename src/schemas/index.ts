@@ -1,4 +1,4 @@
-import { typeDefs as ledTypes } from './led.js';
+import { typeDefs as ledTypes } from './pinOperations.js';
 
 const baseTypeDefs = `
   type Query
