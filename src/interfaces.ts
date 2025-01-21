@@ -2,6 +2,10 @@
 
 import { Direction } from "onoff";
 
+export interface Pin {
+  pinName: string;
+}
+
 export interface PinState {
   pinName: string;
   state: boolean;

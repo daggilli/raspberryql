@@ -1,5 +1,5 @@
 'use strict';
-import { Gpio, BinaryValue } from "onoff";
+import { Gpio, BinaryValue, Direction } from "onoff";
 import { PinMapper } from './pinMapper.js';
 import { PinConfig } from "./interfaces.js";
 
@@ -12,7 +12,6 @@ class GPIOController {
   private _pins: Map<string, Gpio>;
 
   constructor() {
-    console.log("Creating GPIOController");
     this._mapper = new PinMapper();
     this._pins = new Map();
   }
@@ -34,7 +33,11 @@ class GPIOController {
   unregisterPin(pinName: string) {
     const pin = this.getPin(pinName);
     if (pin) {
+      if (pin.direction() === 'out') {
+        pin.writeSync(0);
+      }
       pin.unexport();
+      this._pins.delete(pinName);
     }
   }
 
@@ -51,10 +54,20 @@ class GPIOController {
     return state;
   }
 
-  setPinState(pinName: string, state: boolean) {
+  getPinDirection(pinName: string): Direction | undefined {
     const pin = this.getPin(pinName);
+    if (!pin) return undefined;
+
+    return pin.direction();
+  }
+
+  setPinState(pinName: string, state: boolean): boolean | undefined {
+    const pin = this.getPin(pinName);
+    if (!pin) return undefined;
+
     if (pin) {
       pin.writeSync(boolToBin(state));
+      return state;
     }
   }
 
