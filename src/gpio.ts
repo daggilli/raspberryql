@@ -78,7 +78,7 @@ class GPIOController {
     const curState = pin.readSync();
     if (curState !== undefined) {
       pin.writeSync(invertValue(curState));
-      return binToBool(curState);
+      return !binToBool(curState);
     }
   }
 
