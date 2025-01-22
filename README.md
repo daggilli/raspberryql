@@ -4,7 +4,7 @@
 This project provides basic read and write access to the GPIO pins of a Raspberry Pi via an Apollo GraphQL server.
 
 ### Basic Usage ###
-Pins must be registered before use. This is handled by the `registerPin` mutation which takes a pin name and a direction (which is an `Enum: IN | OUT`). To set an output pin's state use the `setState` nutation; to read an input pin's state, use the `state` query. A simple example in Python follows (assume a microswitch is connect to pin 17 and an LED to pin 21):
+Pins must be registered before use. This is handled by the `registerPin` mutation which takes a pin name and a direction (which is an `Enum: IN | OUT`). To set an output pin's state use the `setState` mutation; to read an input pin's state, use the `state` query. A simple example in Python follows (assume a microswitch is connected to pin 17 and an LED to pin 21):
 
 ```python
 from gql import gql, Client
