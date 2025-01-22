@@ -1,0 +1,10 @@
+[
+  {
+    "pinName": "GPIO21",
+    "direction": "out"
+  },
+  {
+    "pinName": "GPIO17",
+    "direction": "in"
+  }
+]

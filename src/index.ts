@@ -10,14 +10,16 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import https from 'https';
 import fs from 'fs';
 import { ServerConfig } from './interfaces.js';
-import { loadConfigFile } from './utilities.js';
-import { PINS } from './pinConfig.js';
+import { loadPinsConfig, loadServerConfig } from './congifLoader.js';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const serverConfig: ServerConfig = loadConfigFile();
+const serverConfig: ServerConfig = loadServerConfig();
+const defaultPins = loadPinsConfig();
 
-gpioController.registerPins(PINS);
+if (defaultPins?.length) {
+  gpioController.registerPins(defaultPins);
+}
 
 (async () => {
   const app: Express = express();
