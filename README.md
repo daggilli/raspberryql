@@ -64,6 +64,36 @@ if __name__ == "__main__":
     main()
 ```
 
+### Configuration ###
+
+There are two main configuration files, one mandatory (the server configuration) and the other optional (default pin registrations). Both are to be found in the `config` top-level directory.
+
+The server configuration file is named `config.json`. It has three fields, thus:
+
+```json
+{
+  "expressPort": <integer, the port where the server listens>,
+  "sslKeyPath": <string, path to the server's SSL key file>,
+  "sslCertificatePath": <string, path to the server's SSL certificate file>
+}
+```
+
+The pin registrations file is named `defaultPins.json`. It consists of an array of pin names and directions of pins that should be pre-registered at startup, thus:
+
+```json
+[
+  {
+    "pinName": "GPIOxx",
+    "direction": "out"
+  },
+  {
+    "pinName": "GPIOyy",
+    "direction": "in"
+  }
+]
+```
+where `GPIOxx` etc are pin names such as `GPIO13`.
+
 ### Notes ###
 
 The server is written in TypeScript and uses version 4 of the Apollo software. It was written on a Raspberry Pi 4 Model B+ with 8 GB of RAM, running Raspberry Pi OS 12 (which is essentially Debian 12 Bookworm).

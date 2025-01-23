@@ -10,7 +10,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import https from 'https';
 import fs from 'fs';
 import { ServerConfig } from './interfaces.js';
-import { loadPinsConfig, loadServerConfig } from './congifLoader.js';
+import { loadPinsConfig, loadServerConfig } from './configLoader.js';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
