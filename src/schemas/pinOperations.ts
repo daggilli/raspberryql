@@ -6,6 +6,11 @@ export const typeDefs = `#graphql
     OUT
   }
 
+  input PinConfiguration {
+    pinName: String!
+    direction: Direction!
+  }
+
   extend type Query {
     state(pinName: String!): Boolean
     isPinRegistered(pinName: String!): Boolean
@@ -15,7 +20,9 @@ export const typeDefs = `#graphql
   extend type Mutation {
     setState(pinName: String!, state: Boolean!): Boolean
     toggleState(pinName: String!): Boolean
-    registerPin(pinName: String!, direction: Direction!): Boolean
+    registerPin(pinConfig: PinConfiguration!): Boolean
+    registerPins(pinConfigs: [PinConfiguration]!): Boolean
     unregisterPin(pinName: String!): Boolean
+    unregisterPins(pinNames: [String]!): Boolean
   }
 `;

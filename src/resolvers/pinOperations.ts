@@ -1,7 +1,7 @@
 'use strict';
 import { Direction } from 'onoff';
 import { gpioController } from '../gpio.js';
-import { Pin, PinConfig, PinState } from '../interfaces.js';
+import { Pin, PinConfigInput, Pins, PinsConfigInput, PinState } from '../interfaces.js';
 
 export const resolvers = {
   Query: {
@@ -33,8 +33,13 @@ export const resolvers = {
       const newState = gpioController.togglePinState(pinName);
       return newState !== undefined ? newState : null;
     },
-    registerPin: (_: unknown, args: PinConfig): boolean | Error => {
-      gpioController.registerPin(args);
+    registerPin: (_: unknown, args: PinConfigInput): boolean | Error => {
+      // console.log(`REG PIN ARGS ${JSON.stringify(args)}`);
+      gpioController.registerPin(args.pinConfig);
+      return true;
+    },
+    registerPins: (_: unknown, args: PinsConfigInput): boolean | Error => {
+      gpioController.registerPins(args.pinConfigs);
       return true;
     },
     unregisterPin: (_: unknown, args: Pin): boolean | Error => {
@@ -42,6 +47,11 @@ export const resolvers = {
       gpioController.unregisterPin(pinName);
       return true;
     },
+    unregisterPins: (_: unknown, args: Pins): boolean | Error => {
+      const { pinNames } = args;
+      gpioController.unregisterPins(pinNames);
+      return true;
+    }
   },
   Direction: {
     IN: 'in',

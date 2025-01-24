@@ -41,6 +41,12 @@ class GPIOController {
     }
   }
 
+  unregisterPins(pinNames: string[]) {
+    for (const pinName of pinNames) {
+      this.unregisterPin(pinName);
+    }
+  }
+
   getPin(pinName: string): Gpio | undefined {
     return this._pins.get(pinName);
   }
